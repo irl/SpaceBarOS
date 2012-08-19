@@ -1,20 +1,30 @@
-kernel.bin: loader.o kernel.o term.o kbd.o io.o string.o
-	ld -T linker.ld -o kernel.bin loader.o kernel.o term.o kbd.o io.o string.o
-loader.o:
-	nasm -f elf -o loader.o loader.s
-kernel.o:
-	gcc -o kernel.o -c kernel.c -Wall -Wextra -nostdlib -nostartfiles -nodefaultlibs
-term.o:
-	gcc -o term.o -c term.c -Wall -Wextra -nostdlib -nostartfiles -nodefaultlibs
-io.o:
-	gcc -o io.o -c io.c -Wall -Wextra -nostdlib -nostartfiles -nodefaultlibs
-kbd.o:
-	gcc -o kbd.o -c kbd.c -Wall -Wextra -nostdlib -nostartfiles -nodefaultlibs
-string.o:
-	gcc -o string.o -c string.c -Wall -Wextra -nostdlib -nostartfiles -nodefaultlibs
+.PHONY: clean run grub-floppy linux
+
+linux: build build/spacebar.o
+	gcc -lncurses -o spacebar linux/* spacebar.c
+kernel.bin: build/loader.o build/term.o build/kbd.o build/io.o build/string.o build/spacebar.o build/sbos.o
+	ld -melf_i386 -T sbos/linker.ld -o kernel.bin build/loader.o build/term.o build/kbd.o build/io.o build/string.o build/sbos.o build/spacebar.o
+build:
+	mkdir build
+build/loader.o: build
+	nasm -f elf -o build/loader.o sbos/loader.s
+build/sbos.o: build
+	gcc -m32 -o build/sbos.o -c sbos/sbos.c -Wall -Wextra -nostdlib -nostartfiles -nodefaultlibs
+build/term.o: build
+	gcc -m32 -o build/term.o -c sbos/term.c -Wall -Wextra -nostdlib -nostartfiles -nodefaultlibs
+build/io.o: build
+	gcc -m32 -o build/io.o -c sbos/io.c -Wall -Wextra -nostdlib -nostartfiles -nodefaultlibs
+build/kbd.o: build
+	gcc -m32 -o build/kbd.o -c sbos/kbd.c -Wall -Wextra -nostdlib -nostartfiles -nodefaultlibs
+build/string.o: build
+	gcc -m32 -o build/string.o -c sbos/string.c -Wall -Wextra -nostdlib -nostartfiles -nodefaultlibs
+build/spacebar.o:
+	gcc -m32 -o build/spacebar.o -c spacebar.c -Wall -Wextra -nostdlib -nostartfiles -nodefaultlibs
 clean:
-	rm -f loader.o kernel.o term.o io.o kbd.o string.o kernel.bin
-run:
+	-rm -rf build/
+	-rm -f kernel.bin
+	-rm -f spacebar
+run: kernel.bin
 	qemu -kernel kernel.bin
 grub-floppy: kernel.bin
 	cat grub/stage1 grub/stage2 grub/pad kernel.bin > sbos.img
