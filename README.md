@@ -3,13 +3,17 @@ SpaceBarOS
 
 A spacebar oriented lightweight operating system for the x86 platform.
 
-See http://irl.unixcab.org/projects/sbos/ for more details. They may
-be merged in here sometime soon.
+Screenshot
+----------
+
+![Screenshot of SpaceBarOS in QEMU][screenshot]
+
+[screenshot]: http://irl.unixcab.org/projects/sbos/sbos.png
 
 Quick Start
 -----------
 
-To get SpaceBarOS running in qemu, you may first need to install some
+To get SpaceBarOS running in QEMU, you may first need to install some
 dependancies.
 
 * GNU make
@@ -46,6 +50,10 @@ a VM or finding a PC to run it on. You can find this
 
 Experimental Linux Support
 --------------------------
+
+![Screenshot of SpaceBar application running under Linux][linux-screenshot]
+
+[linux-screenshot]: http://irl.unixcab.org/projects/sbos/sbos-linux.png
 
 Under the linux/ folder, there are some files that allow for the
 spacebar application to be compiled under Linux. They do not currently
