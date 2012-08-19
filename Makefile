@@ -1,7 +1,7 @@
 .PHONY: clean run grub-floppy linux
 
 linux: build build/spacebar.o
-	gcc -lncurses -o spacebar linux/* spacebar.c
+	gcc -ggdb -lncurses -o spacebar linux/* spacebar.c
 kernel.bin: build/loader.o build/term.o build/kbd.o build/io.o build/string.o build/spacebar.o build/sbos.o
 	ld -melf_i386 -T sbos/linker.ld -o kernel.bin build/loader.o build/term.o build/kbd.o build/io.o build/string.o build/sbos.o build/spacebar.o
 build:

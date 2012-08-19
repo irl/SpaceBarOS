@@ -6,8 +6,8 @@
 
 void spacebar()
 {
-	unsigned int sbcount;
-	int sbpaused;	
+	unsigned int sbcount = 0;
+	int sbpaused = 0;	
 
 	sb_term_clear();
 
@@ -73,7 +73,7 @@ void spacebar()
 		sb_term_xPos(4);
 		sb_term_yPos(6);
 
-		char* sbcounts = "          "; /* allocate 10 bytes */
+		char sbcounts[255]; /* allocate 255 bytes */
 
 		sb_itoa(sbcounts, 'd', sbcount);
 		sb_tsout("Spacebar has been used ");
