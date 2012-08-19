@@ -42,7 +42,7 @@ Simulator
 A JavaScript based simulator of SpaceBarOS is available for those that
 would like to have the experience of running it without having to set up
 a VM or finding a PC to run it on. You can find this
-[here][http://irl.unixcab.org/projects/sbos/sbos.html].
+[here](http://irl.unixcab.org/projects/sbos/sbos.html).
 
 Experimental Linux Support
 --------------------------
