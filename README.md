@@ -3,7 +3,7 @@ SpaceBarOS
 
 A spacebar oriented lightweight operating system for the x86 platform.
 
-See [http://irl.unixcab.org/projects/sbos/][] for more details. They may
+See http://irl.unixcab.org/projects/sbos/ for more details. They may
 be merged in here sometime soon.
 
 Experimental Linux Support
