@@ -35,6 +35,9 @@ int sb_term_xPos(int newPos)
 	if ( newPos >= 0 && newPos < TERM_MAX_COLS )
 	{
 		curPos = newPos;
+	} else if ( newPos == TERM_MAX_COLS ) {
+		curPos = 0;
+		sb_term_yPos(sb_term_yPos(-1));
 	}
 
 	return curPos + 1;
