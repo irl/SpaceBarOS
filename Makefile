@@ -25,6 +25,6 @@ clean:
 	-rm -f kernel.bin
 	-rm -f spacebar
 run: kernel.bin
-	qemu -kernel kernel.bin
+	qemu-system-i386 -kernel kernel.bin
 grub-floppy: kernel.bin
 	cat grub/stage1 grub/stage2 grub/pad kernel.bin > sbos.img
